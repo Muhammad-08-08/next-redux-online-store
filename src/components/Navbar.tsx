@@ -1,7 +1,8 @@
+import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { BiHeart, BiSearch } from "react-icons/bi";
-import { CgShoppingCart } from "react-icons/cg";
 import { RiUser2Fill } from "react-icons/ri";
+import Cart from "./features/Cart";
 
 function Navbar() {
   return (
@@ -41,11 +42,7 @@ function Navbar() {
             <p className="text-sm mt-1">Sevimlilar</p>
           </div>
 
-          <div className="flex flex-col items-center text-gray-700 hover:text-orange-500 transition cursor-pointer relative">
-            <CgShoppingCart className="w-6 h-6" />
-            <span className="absolute top-0 right-0 text-[10px] bg-amber-500 text-white rounded-full px-1">3</span>
-            <p className="text-sm mt-1">Savatcha</p>
-          </div>
+          <Cart />
         </div>
       </div>
     </div>
