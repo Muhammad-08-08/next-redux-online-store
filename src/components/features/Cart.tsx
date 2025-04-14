@@ -49,7 +49,8 @@ function Cart() {
                                 />
                                 <div>
                                     <h2 className="font-medium">{item.product.name}</h2>
-                                    <p className="text-sm text-gray-600">{item.product.price} so‘m</p>
+                                    <p className="text-sm text-gray-600">${item.product.price}</p>
+                                    <p className="text-sm text-gray-600">{item.qty} ta</p>
                                 </div>
                             </div>
                         ))

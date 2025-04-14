@@ -54,7 +54,7 @@ function CardPage({ items }: CardPageType) {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         dispatch(addToCart(item))
-                                        toast.success("savatchaga q'shildi")
+
                                     }}
                                     className="w-full flex items-center gap-2 cursor-pointer"
                                 >

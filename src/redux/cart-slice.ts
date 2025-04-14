@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
     items: [
@@ -32,12 +33,28 @@ export const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addToCart: (state, { payload }) => {
-            state.items.unshift({
-                product_id: payload.id,
-                product: payload,
-                qty: 1,
-                total_price: payload.price
-            })
+
+            const count = 1
+
+            const bormi = state.items.find(find_product => find_product.product_id === payload.id)
+
+            if (bormi) {
+                state.items.map((item) => {
+                    if (item.product_id === payload.id) {
+                        return item.qty++
+                    }
+                    return item
+                })
+                toast.success("yana bitta tanlandi")
+            } else {
+                state.items.unshift({
+                    product_id: payload.id,
+                    product: payload,
+                    qty: count,
+                    total_price: payload.price
+                })
+                toast.success("savatchaga q'shildi")
+            }
         }
     }
 })
