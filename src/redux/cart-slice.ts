@@ -45,7 +45,7 @@ export const cartSlice = createSlice({
                     }
                     return item
                 })
-                toast.success("yana bitta tanlandi")
+                toast.success(`yana bitta qo'shildi`)
             } else {
                 state.items.unshift({
                     product_id: payload.id,
@@ -55,8 +55,22 @@ export const cartSlice = createSlice({
                 })
                 toast.success("savatchaga q'shildi")
             }
+        },
+        deletedCart: (state, { payload }) => {
+            state.items = state.items.filter(item => item.product.id !== payload)
+            toast.success("product o'chirildi")
+        },
+        increment: (state, { payload }) => {
+            state.items = state.items.map(item => {
+                return item.product_id === payload.product_id ? { ...item, qty: item.qty + 1, total_price: item.total_price + payload.total_price } : item
+            })
+        },
+        decrement: (state, { payload }) => {
+            state.items = state.items.map(item => {
+                return item.product_id === payload.product_id ? { ...item, qty: item.qty - 1, totat_price: item.total_price + payload.total_price } : item
+            })
         }
     }
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, deletedCart, increment, decrement } = cartSlice.actions
