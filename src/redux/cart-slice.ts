@@ -28,6 +28,7 @@ const initialState = {
     ]
 }
 
+
 export const cartSlice = createSlice({
     name: "cart",
     initialState: initialState,
@@ -69,7 +70,7 @@ export const cartSlice = createSlice({
             state.items = state.items.map(item => {
                 return item.product_id === payload.product_id ? { ...item, qty: item.qty - 1, totat_price: item.total_price + payload.total_price } : item
             })
-        }
+        },
     }
 })
 

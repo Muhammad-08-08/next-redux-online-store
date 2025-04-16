@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BiHeart, BiSearch } from "react-icons/bi";
 import { RiUser2Fill } from "react-icons/ri";
 import Cart from "./features/Cart";
+import Liked from "./features/liked";
 
 function Navbar() {
   return (
@@ -36,11 +37,7 @@ function Navbar() {
             <p className="text-sm mt-1">Kirish</p>
           </div>
 
-          <div className="flex flex-col items-center text-gray-700 hover:text-orange-500 transition cursor-pointer relative">
-            <BiHeart className="w-6 h-6" />
-            <span className="absolute top-0 right-0 text-[10px] bg-red-500 text-white rounded-full px-1">2</span>
-            <p className="text-sm mt-1">Sevimlilar</p>
-          </div>
+          <Liked />
 
           <Cart />
         </div>
