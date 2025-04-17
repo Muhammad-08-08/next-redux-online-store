@@ -22,7 +22,7 @@ function CategoriesPage() {
     }, [id])
 
     return (
-        <div>
+        <div className="container mx-auto">
             {categoriesPage && <CardPage items={categoriesPage.items} />}
         </div>
     )
