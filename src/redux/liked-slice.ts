@@ -24,11 +24,9 @@ export const likedSlice = createSlice({
         isLiked: (state, { payload }) => {
             const isLike = state.find(item => item.id === payload.id);
             if (isLike) {
-                toast.success("Yoqtirishlardan olib tashlandi")
                 return state.filter(item => item.id !== payload.id);
             } else {
-                state.push(payload);
-                toast.success("Yoqtirildi")
+                state.unshift(payload);
             }
         },
     },

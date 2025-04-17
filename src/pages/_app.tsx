@@ -1,3 +1,4 @@
+import Maps from "@/components/bizhaqimizda";
 import Categories from "@/components/Categories";
 import Navbar from "@/components/Navbar";
 import { store } from "@/redux/store";
@@ -11,7 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Navbar />
       <Categories />
+      <Maps />
       <Component {...pageProps} />
     </Provider>
   </div>;
 }
+  
