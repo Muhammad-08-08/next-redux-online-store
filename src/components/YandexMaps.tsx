@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { YMaps, Map, Placemark } from '@iminside/react-yandex-maps';
 
-export default function Maps() {
+export default function YandexMaps() {
 
     const [longlat, setLonglat] = useState<{ long: number, lat: number }>()
     const [loading, setLoading] = useState<boolean>(false)
@@ -11,7 +11,7 @@ export default function Maps() {
         zoom: 14,
     };
 
-   
+
     return (
         <div>
             <button onClick={() => {

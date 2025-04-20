@@ -4,6 +4,7 @@ import { BiHeart, BiSearch } from "react-icons/bi";
 import { RiUser2Fill } from "react-icons/ri";
 import Cart from "./features/Cart";
 import Liked from "./features/liked";
+import LogInModal from "./LogInModal";
 
 function Navbar() {
   return (
@@ -32,13 +33,8 @@ function Navbar() {
         </div>
 
         <div className="flex items-center gap-10">
-          <div className="flex flex-col items-center text-gray-700 hover:text-orange-500 transition cursor-pointer">
-            <RiUser2Fill className="w-6 h-6" />
-            <p className="text-sm mt-1">Kirish</p>
-          </div>
-
+          <LogInModal />
           <Liked />
-
           <Cart />
         </div>
       </div>

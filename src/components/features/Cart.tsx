@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { decrement, deletedCart, increment } from "@/redux/cart-slice";
+import Link from "next/link";
 
 function Cart() {
     const cart = useSelector((state: RootState) => state.cart.items);
@@ -82,7 +83,7 @@ function Cart() {
                         <DialogClose asChild>
                             <Button variant="outline">Yopish</Button>
                         </DialogClose>
-                        <Button>Sotib olish</Button>
+                        <Link href={"/checkout"}><Button>Sotib olish</Button></Link>
                     </DialogFooter>
                 )}
             </DialogContent>

@@ -14,8 +14,6 @@ type Props = {
 export async function getServerSideProps({ req, params }: { req: string, params: { id: number } }) {
     const res = await fetch(`https://nt.softly.uz/api/front/products/${params.id}`);
     const data = await res.json();
-    console.log("dff", data);
-
     return { props: { data } };
 }
 
@@ -27,8 +25,8 @@ export default function ProductPage({ data }: Props) {
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-6 p-6 w-full mx-auto rounded-xl bg-white">
                     <div className="w-full md:w-1/2 flex justify-center">
                         <Image
-                            src={data.imageUrl || "jhgvbg"}
-                            alt={data.name || "ijuhyg"}
+                            src={data.imageUrl}
+                            alt={data.name}
                             width={400}
                             height={300}
                             className="rounded-lg object-cover"
