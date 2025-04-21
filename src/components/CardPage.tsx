@@ -24,7 +24,7 @@ function CardPage({ items }: CardPageType) {
                 {items.map((item) => {
                     const like = isLikeds.some(i => i.id === item.id)
                     return <Link key={item.id} href={`/product/${item.id}`}>
-                        <Card className="w-[300px] shadow-lg rounded-lg relative">
+                        <Card className="w-[300px] h-[520px] shadow-lg rounded-lg relative">
                             <div className="relative">
                                 <Image
                                     src={item.imageUrl}
