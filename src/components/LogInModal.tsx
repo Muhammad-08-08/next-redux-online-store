@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import Api from "@/API/Api"
@@ -23,8 +23,7 @@ import {
 } from "./ui/form"
 import { Input } from "./ui/input"
 import toast from "react-hot-toast"
-
-
+import { useRouter } from "next/router"
 
 type FormValues = {
     email: string,
@@ -33,9 +32,18 @@ type FormValues = {
 
 function LogInModal() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [userEmail, setUserEmail] = useState<string | null>(null)
+    const navigate = useRouter()
+
+    useEffect(() => {
+        const localData = localStorage.getItem("yangi_login")
+        if (localData) {
+            const parsed = JSON.parse(localData)
+            setUserEmail(parsed?.email ?? "Foydalanuvchi")
+        }
+    }, [])
 
     const form = useForm<FormValues>({
-
         defaultValues: {
             email: "",
             password: ""
@@ -43,25 +51,43 @@ function LogInModal() {
     })
 
     const onSubmit = async (values: FormValues) => {
-        console.log("Form ma'lumotlari:", values)
         try {
             const response = await Api.post("https://nt.softly.uz/api/auth/login", values)
             const data = await response.data
-            localStorage.setItem("yangi_login", data)
-            setIsOpen(false)
+            localStorage.setItem("yangi_login", JSON.stringify(data))
             toast.success("Logindan o'tildi")
+            setUserEmail(values.email)
+            setIsOpen(false)
+
+            if (navigate.pathname !== "/profile") {
+                navigate.push("/profile")
+            }
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            toast.error("Login xato")
         }
     }
 
+    const handleClick = () => {
+        const token = localStorage.getItem("yangi_login")
+        if (token) {
+            if (navigate.pathname !== "/profile") {
+                navigate.push("/profile")
+            }
+        } else {
+            setIsOpen(true)
+        }
+    }
+
+
     return (
         <div>
-            <div onClick={() => {
-                setIsOpen(true)
-            }} className="flex flex-col items-center text-gray-700 hover:text-orange-500 transition cursor-pointer">
+            <div
+                onClick={handleClick}
+                className="flex flex-col items-center text-gray-700 hover:text-orange-500 transition cursor-pointer"
+            >
                 <RiUser2Fill className="w-6 h-6" />
-                <p className="text-sm mt-1">Kirish</p>
+                <p className="text-sm mt-1">{userEmail ?? "Kirish"}</p>
             </div>
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -82,10 +108,7 @@ function LogInModal() {
                                         <FormControl>
                                             <Input placeholder="email" {...field} />
                                         </FormControl>
-
                                         <FormMessage />
-
-
                                     </FormItem>
                                 )}
                             />
@@ -96,12 +119,9 @@ function LogInModal() {
                                     <FormItem>
                                         <FormLabel>password</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="" {...field} />
+                                            <Input placeholder="••••••••" type="password" {...field} />
                                         </FormControl>
-
                                         <FormMessage />
-
-
                                     </FormItem>
                                 )}
                             />
@@ -113,7 +133,6 @@ function LogInModal() {
                         <DialogClose asChild>
                             <Button variant="outline">Yopish</Button>
                         </DialogClose>
-                        <Button>Sotib olish</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

@@ -1,13 +1,13 @@
 import CardPage from "@/components/CardPage"
 import { ProductType } from "@/types/types"
 import axios from "axios"
-import { useParams } from "next/navigation"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 function CategoriesPage() {
     const [categoriesPage, setCategoriesPage] = useState<ProductType>()
-
-    const { id } = useParams()
+    const router = useRouter()
+    const { id } = router.query
     useEffect(() => {
         axios.get(`https://nt.softly.uz/api/front/products`, {
             params: {
