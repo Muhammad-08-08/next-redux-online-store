@@ -34,7 +34,7 @@ export default function ProductPage({ data }: Props) {
                     </div>
 
                     <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
-                        <h2 className="text-3xl font-bold text-gray-900">{data.name}</h2>
+                        <h1 className="text-3xl font-bold text-gray-900">{data.name}</h1>
                         <p className="text-gray-700 text-md">{data.description}</p>
                         <p className="text-2xl font-semibold text-green-600">${data.price}</p>
 
