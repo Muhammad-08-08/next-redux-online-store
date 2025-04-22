@@ -33,12 +33,10 @@ function CategoriesPage() {
         })
     }, [id, page]);
 
-    const totalItems = categoriesPage ? categoriesPage.totalItems : 0;
-    const totalPages = Math.ceil(totalItems / limit);
-
-    if (loading) {
+    if (loading || !categoriesPage) {
         return <p className="text-center font-bold ">Loading...</p>
     }
+    const totalPages = Math.ceil(categoriesPage?.totalItems / limit);
 
     return (
         <div className="container mx-auto py-6">
