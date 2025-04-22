@@ -2,6 +2,7 @@ import CardPage from "@/components/CardPage";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ProductType } from "@/types/types";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -9,13 +10,15 @@ import toast from "react-hot-toast";
 function CategoriesPage() {
     const [categoriesPage, setCategoriesPage] = useState<ProductType | null>(null);
     const [loading, setLoading] = useState<boolean>(false)
-    const [page, setPage] = useState<number>(1);
     const limit = 10;
     const router = useRouter();
     const { id } = router.query;
+    const searchParams = useSearchParams();
+    const pageParam = searchParams.get("page");
+    const page = pageParam ? parseInt(pageParam) : 1;
+
 
     useEffect(() => {
-        if (!id) return;
         setLoading(true)
         axios.get(`https://nt.softly.uz/api/front/products`, {
             params: {
@@ -38,6 +41,14 @@ function CategoriesPage() {
     }
     const totalPages = Math.ceil(categoriesPage?.totalItems / limit);
 
+    const handlePageChange = (newPage: number) => {
+        router.push({
+            pathname: router.pathname,
+            query: { ...router.query, page: newPage },
+        });
+    };
+
+
     return (
         <div className="container mx-auto py-6">
             {categoriesPage && <CardPage items={categoriesPage.items} />}
@@ -45,26 +56,23 @@ function CategoriesPage() {
             <div className="flex justify-center mt-6">
                 <Pagination>
                     <PaginationContent>
-                        <PaginationItem onClick={() => {
+                        {page > 1 && <PaginationItem onClick={() => {
                             if (page > 1) {
-                                setPage(page - 1)
+                                handlePageChange(page - 1)
                             }
                         }}>
                             <PaginationPrevious href="#" />
-                        </PaginationItem>
+                        </PaginationItem>}
                         <PaginationItem>
                             <PaginationLink href="#">{page}</PaginationLink>
                         </PaginationItem>
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                        <PaginationItem onClick={() => {
+                        {page !== totalPages && <PaginationItem onClick={() => {
                             if (totalPages !== page) {
-                                setPage(page + 1)
+                                handlePageChange(page + 1)
                             }
                         }}>
                             <PaginationNext href="#" />
-                        </PaginationItem>
+                        </PaginationItem>}
                     </PaginationContent>
                 </Pagination>
             </div>
