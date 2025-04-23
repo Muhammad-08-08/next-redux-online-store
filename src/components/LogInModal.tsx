@@ -52,19 +52,18 @@ function LogInModal() {
 
     const onSubmit = async (values: FormValues) => {
         try {
-            const response = await Api.post("https://nt.softly.uz/api/auth/login", values)
-            const data = await response.data
+            const { data } = await Api.post("https://nt.softly.uz/api/auth/login", values)
             localStorage.setItem("yangi_login", JSON.stringify(data))
-            toast.success("Logindan o'tildi")
+            toast.success("Tizimga muvaffaqiyatli kirdingiz!")
             setUserEmail(values.email)
             setIsOpen(false)
 
             if (navigate.pathname !== "/profile") {
-                navigate.push("/profile")
+                await navigate.push("/profile")
             }
-        } catch (error) {
-            console.log(error)
-            toast.error("Login xato")
+        } catch (error: any) {
+            console.error("Login xatosi:", error?.response?.data || error.message)
+            toast.error("Login yoki parol noto'g'ri. Iltimos, qayta urinib ko'ring.")
         }
     }
 

@@ -1,7 +1,9 @@
 import CardPage from "@/components/CardPage";
+import { Button } from "@/components/ui/button";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ProductType } from "@/types/types";
 import axios from "axios";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -10,12 +12,11 @@ import toast from "react-hot-toast";
 function CategoriesPage() {
     const [categoriesPage, setCategoriesPage] = useState<ProductType | null>(null);
     const [loading, setLoading] = useState<boolean>(false)
-    const limit = 10;
     const router = useRouter();
     const { id } = router.query;
     const searchParams = useSearchParams();
-    const pageParam = searchParams.get("page");
-    const page = pageParam ? parseInt(pageParam) : 1;
+    const page = Number(searchParams.get("page") || 1);
+    const limit = Number(searchParams.get("limit") || 10);
 
 
     useEffect(() => {
@@ -41,40 +42,18 @@ function CategoriesPage() {
     }
     const totalPages = Math.ceil(categoriesPage?.totalItems / limit);
 
-    const handlePageChange = (newPage: number) => {
-        router.push({
-            pathname: router.pathname,
-            query: { ...router.query, page: newPage },
-        });
-    };
-
-
     return (
         <div className="container mx-auto py-6">
             {categoriesPage && <CardPage items={categoriesPage.items} />}
 
-            <div className="flex justify-center mt-6">
-                <Pagination>
-                    <PaginationContent>
-                        {page > 1 && <PaginationItem onClick={() => {
-                            if (page > 1) {
-                                handlePageChange(page - 1)
-                            }
-                        }}>
-                            <PaginationPrevious href="#" />
-                        </PaginationItem>}
-                        <PaginationItem>
-                            <PaginationLink href="#">{page}</PaginationLink>
-                        </PaginationItem>
-                        {page !== totalPages && <PaginationItem onClick={() => {
-                            if (totalPages !== page) {
-                                handlePageChange(page + 1)
-                            }
-                        }}>
-                            <PaginationNext href="#" />
-                        </PaginationItem>}
-                    </PaginationContent>
-                </Pagination>
+            <div className="flex justify-center gap-2 mt-6">
+                {[...Array(totalPages)].map((_, index) => {
+                    const index_number = index + 1;
+                    return <Link href={`/categories/${id}?page=${index_number}&limit=${limit}`} key={index}>
+                        <Button className="cursor-pointer" variant={index_number === Number(page) ? "default" : "outline"}>{index_number}</Button>
+                    </Link>
+                }
+                )}
             </div>
         </div>
     );
