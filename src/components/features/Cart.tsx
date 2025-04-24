@@ -81,9 +81,11 @@ function Cart() {
                 {cart.length > 0 && (
                     <DialogFooter className="mt-4">
                         <DialogClose asChild>
-                            <Button variant="outline">Yopish</Button>
+                            <Button variant="outline" className="cursor-pointer">Yopish</Button>
                         </DialogClose>
-                        <Link href={"/checkout"}><Button>Sotib olish</Button></Link>
+                        <DialogClose asChild>
+                            <Link href={"/checkout"} className="cursor-pointer"><Button>Sotib olish</Button></Link>
+                        </DialogClose>
                     </DialogFooter>
                 )}
             </DialogContent>

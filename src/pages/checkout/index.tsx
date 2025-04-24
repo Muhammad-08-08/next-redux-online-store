@@ -1,17 +1,39 @@
+import { Button } from "@/components/ui/button";
 import { RootState } from "@/redux/store";
+import axios from "axios";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const CheckoutPage = () => {
     const cart = useSelector((state: RootState) => state.cart.items)
+    const accessToken = useSelector((state: RootState) => state.login.accessToken)
+    const [address, setAddress] = useState("")
+
+    function handleSubmit() {
+        axios.post("https://nt.softly.uz/api/front/orders", {
+            address: address,
+            items: cart.map(item => ({
+                productId: item.product.id,
+                quantity: item.qty,
+            }))
+        }, {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        })
+            .then(res => {
+                console.log("Buyurtma muvaffaqiyatli yuborildi:", res.data);
+            })
+            .catch(err => {
+                console.error("Buyurtma yuborilmadi:", err.response?.data || err.message);
+            });
+    }
+
     return (
         <div className="bg-[#F9F9F9] py-10 px-4 md:px-16 font-sans">
             <div className="max-w-7xl mx-auto">
                 <div className="text-sm text-gray-500 mb-6">
                     <span className="hover:underline cursor-pointer">Bosh sahifa</span> / <span className="hover:underline cursor-pointer">Xarid</span> / <span className="text-black font-medium">Xaridni rasmiylashtirish</span>
                 </div>
-
                 <h2 className="text-2xl font-semibold mb-8">Xaridni rasmiylashtirish</h2>
-
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div className="flex-1 space-y-10">
                         <div>
@@ -38,7 +60,11 @@ const CheckoutPage = () => {
                                 </select>
                                 <input type="text" placeholder="Kvartal (agar bolsa)" className="border border-gray-300 rounded-lg px-4 py-2 w-full" />
                             </div>
-                            <input type="text" placeholder="Manzil (masalan: Yunusobod 13-kvartal)" className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4" />
+                            <input
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                type="text" placeholder="Manzil (masalan: Yunusobod 13-kvartal)"
+                                className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4" />
                             <div className="flex flex-wrap gap-4">
                                 <button className="border border-yellow-500 bg-yellow-100 rounded-lg px-6 py-3 w-full md:w-auto text-center">
                                     Ertaga yoki keyinroq<br /><span className="text-sm text-gray-600">30 000 so'm</span>
@@ -58,7 +84,13 @@ const CheckoutPage = () => {
                                     </div>
                                 ))}
                             </div>
-                            <input type="text" placeholder="Buyurtmaga izoh" className="border border-gray-300 rounded-lg px-4 py-2 w-full" />
+                            <input
+                                type="text"
+                                placeholder="Buyurtmaga izoh"
+                                className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+                            />
+
+                            <Button onClick={() => { handleSubmit() }} className="w-full my-4 cursor-pointer bg-amber-600 hover:bg-amber-700 transition-all duration-700">Xaridni Rasmiylashtirish</Button>
                         </div>
                     </div>
 
