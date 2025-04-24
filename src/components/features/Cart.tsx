@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { CgShoppingCart } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
-    DialogTrigger,
+    DialogClose,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogDescription,
     DialogFooter,
-    DialogClose,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
 import { decrement, deletedCart, increment } from "@/redux/cart-slice";
+import { Trash } from "lucide-react";
 import Link from "next/link";
 
 function Cart() {

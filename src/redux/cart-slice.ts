@@ -2,36 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const initialState = {
-    items: [
-        {
-            product_id: 1,
-            product: {
-                id: 1,
-                name: "test 1",
-                imageUrl: "https://tinypng.com/static/images/boat.png",
-                price: 20
-            },
-            qty: 1,
-            total_price: 20
-        },
-        {
-            product_id: 2,
-            product: {
-                id: 2,
-                name: "test 2",
-                imageUrl: "https://tinypng.com/static/images/boat.png",
-                price: 20
-            },
-            qty: 2,
-            total_price: 40
-        }
-    ]
+    items: []
 }
+
+type CartItem = {
+    product_id: number;
+    product: {
+        id: number;
+        name: string;
+        imageUrl: string;
+        price: number;
+    };
+    qty: number;
+    total_price: number;
+};
+
+type CartType = {
+    items: CartItem[];
+};
 
 
 export const cartSlice = createSlice({
     name: "cart",
-    initialState: initialState,
+    initialState: initialState as CartType,
     reducers: {
         addToCart: (state, { payload }) => {
 

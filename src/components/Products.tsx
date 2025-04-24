@@ -7,7 +7,6 @@ function Products() {
     const [products, setProducts] = useState<ProductType>()
     useEffect(() => {
         axios.get("https://nt.softly.uz/api/front/products?page=1&limit=10").then(response => {
-            console.log(response.data);
             setProducts(response.data)
         })
     }, [])

@@ -1,4 +1,8 @@
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+
 const CheckoutPage = () => {
+    const cart = useSelector((state: RootState) => state.cart.items)
     return (
         <div className="bg-[#F9F9F9] py-10 px-4 md:px-16 font-sans">
             <div className="max-w-7xl mx-auto">
@@ -37,10 +41,10 @@ const CheckoutPage = () => {
                             <input type="text" placeholder="Manzil (masalan: Yunusobod 13-kvartal)" className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4" />
                             <div className="flex flex-wrap gap-4">
                                 <button className="border border-yellow-500 bg-yellow-100 rounded-lg px-6 py-3 w-full md:w-auto text-center">
-                                    Ertaga yoki keyinroq<br /><span className="text-sm text-gray-600">30 000 so’m</span>
+                                    Ertaga yoki keyinroq<br /><span className="text-sm text-gray-600">30 000 so'm</span>
                                 </button>
                                 <button className="border border-gray-300 rounded-lg px-6 py-3 w-full md:w-auto text-center">
-                                    Tez yetkazib berish<br /><span className="text-sm text-gray-600">30 000 so’mdan</span>
+                                    Tez yetkazib berish<br /><span className="text-sm text-gray-600">30 000 so'mdan</span>
                                 </button>
                             </div>
                         </div>
@@ -60,26 +64,28 @@ const CheckoutPage = () => {
 
                     <div className="w-full lg:w-1/3 space-y-4">
                         <div className="border border-gray-200 bg-white rounded-xl p-4 shadow-sm">
-                            <div className="flex items-center gap-4 mb-4">
-                                <img src="https://texnomart.uz/_nuxt/img/vivie-bt814.7287c99.png" alt="Product" className="w-16 h-16 object-contain" />
-                                <div>
-                                    <p className="text-sm font-medium">Simsiz quloqchinlar Vidvie BT814 White</p>
-                                    <p className="text-sm text-gray-600">132 000 so’m</p>
+                            {cart.map(item => {
+                                return <div className="flex items-center gap-4 mb-4">
+                                    <img src={item.product.imageUrl} alt={item.product.name} className="w-16 h-16 object-contain" />
+                                    <div>
+                                        <p className="text-sm font-medium">{item.product.name}</p>
+                                        <p className="text-sm text-gray-600">{Number(item.product.price).toLocaleString("ru")} so'm</p>
+                                    </div>
                                 </div>
-                            </div>
+                            })}
                             <hr className="my-2" />
                             <div className="flex justify-between text-sm text-gray-600">
-                                <p>1 dona mahsulot narxi</p>
-                                <p>132 000 so’m</p>
+                                <p>{cart.length} dona mahsulot narxi</p>
+                                <p>{cart.reduce((acc, item) => acc + item.product.price, 0).toLocaleString("ru")} so'm</p>
                             </div>
                             <div className="flex justify-between text-sm text-gray-600">
                                 <p>Yetkazib berish</p>
-                                <p>30 000 so’m</p>
+                                <p>30 000 so'm</p>
                             </div>
                             <hr className="my-2" />
                             <div className="flex justify-between font-semibold text-lg">
                                 <p>Jami</p>
-                                <p>162 000 so’m</p>
+                                <p>{Number(cart.reduce((acc, item) => acc + item.product.price, 0) + Number(30000)).toLocaleString("ru")} so'm</p>
                             </div>
                             <input type="text" placeholder="Promokodni kiriting" className="border border-gray-300 rounded-lg px-4 py-2 w-full mt-4" />
                         </div>
