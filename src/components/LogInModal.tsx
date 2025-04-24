@@ -39,7 +39,7 @@ function LogInModal() {
         const localData = localStorage.getItem("yangi_login")
         if (localData) {
             const parsed = JSON.parse(localData)
-            setUserEmail(parsed?.email ?? "Foydalanuvchi")
+            setUserEmail(parsed.name ?? "profil")
         }
     }, [])
 
@@ -135,6 +135,8 @@ function LogInModal() {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
+
+
         </div>
     )
 }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.2",
     "@hookform/resolvers": "^5.0.1",
     "@iminside/react-yandex-maps": "^1.2.7",
     "@radix-ui/react-dialog": "^1.1.7",

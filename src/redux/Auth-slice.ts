@@ -2,12 +2,18 @@ import Api from "@/API/Api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type AuthSliceType = {
-    user: string | null;
+    user: {
+        id: number,
+        name: string
+    } | null;
     accessToken: string;
 };
 
 const initialState: AuthSliceType = {
-    user: null,
+    user: {
+        id: NaN,
+        name: "",
+    },
     accessToken: ""
 };
 
