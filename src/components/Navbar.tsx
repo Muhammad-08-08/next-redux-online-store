@@ -1,7 +1,5 @@
-import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { BiHeart, BiSearch } from "react-icons/bi";
-import { RiUser2Fill } from "react-icons/ri";
+import { BiSearch } from "react-icons/bi";
 import Cart from "./features/Cart";
 import Liked from "./features/liked";
 import LogInModal from "./LogInModal";
@@ -12,11 +10,7 @@ function Navbar() {
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-6">
           <Link href="/">
-            <img
-              className="cursor-pointer w-32"
-              src="/logo.png"
-              alt=" logo"
-            />
+            <h2 className="text-2xl font-bold">Muhammad shop</h2>
           </Link>
           <button className="px-5 py-2 bg-orange-500 text-white font-semibold text-lg flex items-center gap-2 rounded-lg hover:bg-orange-600 transition-all duration-300">
             📦 Katalog

@@ -2,16 +2,20 @@ import { Switch } from "@headlessui/react";
 import { FiBox, FiClock, FiCreditCard, FiLogOut } from "react-icons/fi";
 
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/Auth-slice";
+import Link from "next/link";
 
 const ProfilePage = () => {
     const [smsEnabled, setSmsEnabled] = useState(false);
     const [telegramEnabled, setTelegramEnabled] = useState(false);
+    const dispatch = useDispatch()
 
     return (
         <div className="bg-[#f5f5f5] min-h-screen py-10 font-sans">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-sm text-gray-400 mb-6">
-                    <span className="bg-gray-200 px-2 py-1 rounded">Bosh sahifa</span> /
+                    <span className="bg-gray-200 px-2 py-1 rounded">Bosh sahifa</span>
                     <span className="ml-2 text-black font-medium">Shaxsiy kabinet</span>
                 </div>
 
@@ -27,30 +31,35 @@ const ProfilePage = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 flex flex-col gap-4">
                             <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                <FiCreditCard /> Mening to‘lovlarim
-                            </div>
-                            <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                <FiClock /> To‘lov tarixi
+                                <FiCreditCard /> Mening to'lovlarim
                             </div>
                             <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                <FiBox /> Onlayn buyurtmalar
+                                <FiClock /> To'lov tarixi
                             </div>
-                            <div className="flex items-center gap-2 text-red-500 hover:text-red-600 cursor-pointer">
-                                <FiLogOut /> Chiqish
-                            </div>
+                            <Link href={`/buyurtmalar/491`}>
+                                <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
+                                    <FiBox /> Onlayn buyurtmalar
+                                </div></Link>
+                            <Link href={"/"}>
+                                <div onClick={() => {
+                                    dispatch(logout())
+                                }} className="flex items-center gap-2 text-red-500 hover:text-red-600 cursor-pointer">
+                                    <FiLogOut /> Chiqish
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
                     <div className="md:col-span-3 space-y-6">
                         <div className="bg-white rounded-[12px] shadow p-5 flex justify-between items-start text-sm">
                             <div>
-                                <h3 className="font-semibold text-base mb-1">Shaxsiy ma’lumotlar</h3>
+                                <h3 className="font-semibold text-base mb-1">Shaxsiy ma'lumotlar</h3>
                                 <p className="text-gray-800">Muhammad</p>
                                 <p className="text-gray-500">Telefon: +998773058208</p>
                             </div>
-                            <button className="text-sm text-blue-600 hover:underline">O‘zgartirish</button>
+                            <button className="text-sm text-blue-600 hover:underline">O'zgartirish</button>
                         </div>
 
                         <div className="bg-white rounded-[12px] shadow p-5 text-sm">
@@ -103,7 +112,7 @@ const ProfilePage = () => {
                                     <p className="text-gray-500">Manzil qo‘shilmagan</p>
                                 </div>
                                 <button className="text-sm bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-xl">
-                                    Qo‘shish
+                                    Qo'shish
                                 </button>
                             </div>
                         </div>
