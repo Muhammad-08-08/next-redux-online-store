@@ -1,6 +1,5 @@
 import { Switch } from "@headlessui/react";
 import { FiBox, FiClock, FiCreditCard, FiLogOut } from "react-icons/fi";
-
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/Auth-slice";
@@ -9,70 +8,75 @@ import Link from "next/link";
 const ProfilePage = () => {
     const [smsEnabled, setSmsEnabled] = useState(false);
     const [telegramEnabled, setTelegramEnabled] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return (
-        <div className="bg-[#f5f5f5] min-h-screen py-10 font-sans">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="text-sm text-gray-400 mb-6">
-                    <span className="bg-gray-200 px-2 py-1 rounded">Bosh sahifa</span>
-                    <span className="ml-2 text-black font-medium">Shaxsiy kabinet</span>
+        <div className="min-h-screen  bg-gray-100 py-8 px-4">
+            <div className="mx-auto bg-gray-100 space-y-8 px-10">
+
+                <div className="text-sm text-gray-500">
+                    <span className="bg-gray-200 px-2 py-1 rounded-md">Bosh sahifa</span>
+                    <span className="mx-2">/</span>
+                    <span className="text-black font-semibold">Shaxsiy kabinet</span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="bg-white rounded-[12px] shadow p-5 space-y-5 text-sm">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+                    <div className="rounded-2xl shadow-md p-6 space-y-8">
+                        <div className="flex items-center gap-4">
+                            <div className="w-14 h-14 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
                                 M
                             </div>
                             <div>
-                                <div className="font-semibold text-sm">Muhammad</div>
-                                <div className="text-gray-500 text-xs">+998773058208</div>
+                                <p className="font-semibold text-gray-800">Muhammad</p>
+                                <p className="text-xs text-gray-600">+998773058208</p>
                             </div>
                         </div>
 
-                        <div className="space-y-4 flex flex-col gap-4">
-                            <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                <FiCreditCard /> Mening to'lovlarim
+                        <div className="flex flex-col gap-4 text-sm">
+                            <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer transition">
+                                <FiCreditCard /> <span>Mening to'lovlarim</span>
                             </div>
-                            <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                <FiClock /> To'lov tarixi
+                            <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer transition">
+                                <FiClock /> <span>To'lov tarixi</span>
                             </div>
-                            <Link href={`/buyurtmalar/491`}>
-                                <div className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer">
-                                    <FiBox /> Onlayn buyurtmalar
-                                </div></Link>
-                            <Link href={"/"}>
-                                <div onClick={() => {
-                                    dispatch(logout())
-                                }} className="flex items-center gap-2 text-red-500 hover:text-red-600 cursor-pointer">
-                                    <FiLogOut /> Chiqish
-                                </div>
+                            <Link href="/buyurtmalar/491" className="flex items-center gap-2 text-gray-700 hover:text-yellow-500 cursor-pointer transition">
+                                <FiBox /> <span>Onlayn buyurtmalar</span>
                             </Link>
+                            <div
+                                onClick={() => dispatch(logout())}
+                                className="flex items-center gap-2 text-red-500 hover:text-red-600 cursor-pointer transition"
+                            >
+                                <FiLogOut /> <span>Chiqish</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="md:col-span-3 space-y-6">
-                        <div className="bg-white rounded-[12px] shadow p-5 flex justify-between items-start text-sm">
+                    <div className="lg:col-span-3 space-y-8">
+
+                        <div className="bg-white rounded-2xl shadow-md p-6 flex justify-between items-start flex-wrap gap-4">
                             <div>
-                                <h3 className="font-semibold text-base mb-1">Shaxsiy ma'lumotlar</h3>
+                                <h3 className="font-semibold text-lg mb-1">Shaxsiy ma'lumotlar</h3>
                                 <p className="text-gray-800">Muhammad</p>
-                                <p className="text-gray-500">Telefon: +998773058208</p>
+                                <p className="text-gray-500 text-sm">Telefon: +998773058208</p>
                             </div>
-                            <button className="text-sm text-blue-600 hover:underline">O'zgartirish</button>
+                            <button className="text-blue-600 hover:underline text-sm">O'zgartirish</button>
                         </div>
 
-                        <div className="bg-white rounded-[12px] shadow p-5 text-sm">
-                            <h3 className="font-semibold text-base mb-1">Xabarlar yoki yangiliklar</h3>
-                            <p className="text-gray-500 mb-4">
-                                Aksiyalar va chegirmalar haqida ma’lumot olish
-                            </p>
-                            <div className="flex gap-10">
-                                <div className="flex items-center gap-2">
+                        <div className="bg-white rounded-2xl shadow-md p-6 space-y-6">
+                            <div>
+                                <h3 className="font-semibold text-lg mb-2">Xabarlar va yangiliklar</h3>
+                                <p className="text-gray-500 text-sm">
+                                    Aksiyalar va chegirmalar haqida ma’lumot olishni xohlaysizmi?
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row gap-8">
+                                <div className="flex items-center gap-4">
                                     <Switch
                                         checked={smsEnabled}
                                         onChange={setSmsEnabled}
-                                        className={`${smsEnabled ? "bg-yellow-400" : "bg-gray-200"
+                                        className={`${smsEnabled ? "bg-yellow-400" : "bg-gray-300"
                                             } relative inline-flex h-6 w-11 items-center rounded-full transition`}
                                     >
                                         <span
@@ -82,11 +86,12 @@ const ProfilePage = () => {
                                     </Switch>
                                     <span className="text-gray-700">SMS orqali</span>
                                 </div>
-                                <div className="flex items-center gap-2">
+
+                                <div className="flex items-center gap-4">
                                     <Switch
                                         checked={telegramEnabled}
                                         onChange={setTelegramEnabled}
-                                        className={`${telegramEnabled ? "bg-yellow-400" : "bg-gray-200"
+                                        className={`${telegramEnabled ? "bg-yellow-400" : "bg-gray-300"
                                             } relative inline-flex h-6 w-11 items-center rounded-full transition`}
                                     >
                                         <span
@@ -99,25 +104,27 @@ const ProfilePage = () => {
                             </div>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-6 text-sm">
-                            <div className="bg-white rounded-[12px] shadow p-5">
-                                <h3 className="font-semibold text-base mb-1">Mening kartam</h3>
-                                <p className="text-gray-500">Mavjud emas</p>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-white rounded-2xl shadow-md p-6 space-y-2">
+                                <h3 className="font-semibold text-lg">Mening kartam</h3>
+                                <p className="text-gray-500 text-sm">Mavjud emas</p>
                             </div>
-                            <div className="bg-white rounded-[12px] shadow p-5 flex justify-between items-center">
+
+                            <div className="bg-white rounded-2xl shadow-md p-6 flex justify-between items-center">
                                 <div>
-                                    <h3 className="font-semibold text-base mb-1">
-                                        Yetkazib berish manzili
-                                    </h3>
-                                    <p className="text-gray-500">Manzil qo‘shilmagan</p>
+                                    <h3 className="font-semibold text-lg">Yetkazib berish manzili</h3>
+                                    <p className="text-gray-500 text-sm">Manzil qo‘shilmagan</p>
                                 </div>
-                                <button className="text-sm bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-xl">
+                                <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-xl transition text-sm">
                                     Qo'shish
                                 </button>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
         </div>
     );
