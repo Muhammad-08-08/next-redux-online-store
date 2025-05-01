@@ -152,7 +152,7 @@ const CheckoutPage = () => {
                 onClick={() => {
                   handleSubmit();
                 }}
-                className="w-full my-4 cursor-pointer bg-amber-600 hover:bg-amber-700 transition-all duration-700"
+                className="w-full my-4 cursor-pointer bg-amber-600 hover:bg-amber-700 transition-all duration-700 active:scale-95"
               >
                 Xaridni Rasmiylashtirish
               </Button>

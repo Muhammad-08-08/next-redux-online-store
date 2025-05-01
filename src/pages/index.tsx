@@ -20,7 +20,6 @@ export default function Home() {
     >
       <Banners />
       <Products />
-      <YandexMaps />
     </div>
   );
 }

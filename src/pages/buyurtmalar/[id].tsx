@@ -83,59 +83,61 @@ function Buyurtlamar() {
         {orders.length === 0 ? (
           <p className="text-gray-500">Buyurtmalar mavjud emas.</p>
         ) : (
-          orders.map((order) => (
-            <Card
-              key={order.id}
-              className="bg-white rounded-2xl border border-gray-200 shadow hover:shadow-lg transition"
-            >
-              <CardContent className="p-5 space-y-3">
-                <div className="flex justify-between items-center">
-                  <div className="space-y-1">
-                    <p className="text-sm text-gray-500">
-                      Buyurtma ID:{" "}
-                      <span className="font-semibold">{order.id}</span>
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Status:{" "}
-                      <span className="capitalize font-medium text-yellow-600">
-                        {order.status}
-                      </span>
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Sana:{" "}
-                      <span className="font-medium">
-                        {new Date(order.createdAt).toLocaleString()}
-                      </span>
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xl font-bold text-green-600">
-                      {order.totalPrice.toLocaleString()} so'm
-                    </p>
-                  </div>
-                </div>
-
-                <div className="border-t pt-3 space-y-2">
-                  {order.items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex justify-between text-sm border-b pb-1 last:border-none"
-                    >
-                      <span className="text-gray-600">
-                        Mahsulot ID: {item.productId}
-                      </span>
-                      <span className="text-gray-600">
-                        {item.quantity} dona
-                      </span>
-                      <span className="text-gray-600">
-                        {item.price.toLocaleString()} so'm
-                      </span>
+          <div className="grid grid-cols-2 gap-4">
+            {orders.map((order) => (
+              <Card
+                key={order.id}
+                className="bg-white rounded-2xl border border-gray-200 shadow hover:shadow-lg transition"
+              >
+                <CardContent className="p-5 space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="space-y-1">
+                      <p className="text-sm text-gray-500">
+                        Buyurtma ID:{" "}
+                        <span className="font-semibold">{order.id}</span>
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Status:{" "}
+                        <span className="capitalize font-medium text-yellow-600">
+                          {order.status}
+                        </span>
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Sana:{" "}
+                        <span className="font-medium">
+                          {new Date(order.createdAt).toLocaleString()}
+                        </span>
+                      </p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-green-600">
+                        {order.totalPrice.toLocaleString()} so'm
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="border-t pt-3 space-y-2">
+                    {order.items.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex justify-between text-sm border-b pb-1 last:border-none"
+                      >
+                        <span className="text-gray-600">
+                          Mahsulot ID: {item.productId}
+                        </span>
+                        <span className="text-gray-600">
+                          {item.quantity} dona
+                        </span>
+                        <span className="text-gray-600">
+                          {item.price.toLocaleString()} so'm
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         )}
       </div>
     </div>

@@ -24,24 +24,23 @@ function CardPage({ items }: CardPageType) {
           const like = isLikeds.some((i) => i.id === item.id);
           return (
             <Link key={item.id} href={`/product/${item.id}`}>
-              <Card className="w-full h-[520px] shadow-lg rounded-lg relative">
-                <div className="relative">
+              <Card className="w-full pt-0 shadow-lg rounded-lg relative">
+                <div className="relative w-full h-[38vh]">
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
-                    width={0}
-                    height={0}
-                    className="w-full h-[30vh] object-cover"
+                    fill
+                    className="object-cover rounded-t-lg hover:scale-95 transition-all duration-500"
                   />
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       dispatch(isLiked(item));
                     }}
-                    className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 transition cursor-pointer"
+                    className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 transition cursor-pointer active:scale-95"
                   >
                     <Heart
-                      className={`text-red-500 ${
+                      className={`${
                         like ? "text-pink-500 fill-pink-500" : "text-gray-400"
                       }`}
                       size={20}
@@ -67,7 +66,7 @@ function CardPage({ items }: CardPageType) {
                       e.preventDefault();
                       dispatch(addToCart(item));
                     }}
-                    className="w-full flex items-center gap-2 cursor-pointer"
+                    className="w-full flex items-center gap-2 cursor-pointer active:scale-95"
                   >
                     <PiShoppingCartDuotone size={18} /> Savatchaga qo'shish
                   </Button>
