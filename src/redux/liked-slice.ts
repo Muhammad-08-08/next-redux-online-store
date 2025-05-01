@@ -2,34 +2,34 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 export type likedSliceType = {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
 }[];
 
 const isLike: likedSliceType = [
-    {
-        id: 1,
-        name: "test 1",
-        imageUrl: "https://tinypng.com/static/images/boat.png",
-        price: 20,
-    },
+  {
+    id: 1,
+    name: "test 1",
+    imageUrl: "https://tinypng.com/static/images/boat.png",
+    price: 20,
+  },
 ];
 
 export const likedSlice = createSlice({
-    name: "like",
-    initialState: isLike,
-    reducers: {
-        isLiked: (state, { payload }) => {
-            const isLike = state.find(item => item.id === payload.id);
-            if (isLike) {
-                return state.filter(item => item.id !== payload.id);
-            } else {
-                state.unshift(payload);
-            }
-        },
+  name: "like",
+  initialState: isLike,
+  reducers: {
+    isLiked: (state, { payload }) => {
+      const isLike = state.find((item) => item.id === payload.id);
+      if (isLike) {
+        return state.filter((item) => item.id !== payload.id);
+      } else {
+        state.unshift(payload);
+      }
     },
+  },
 });
 
 export const { isLiked } = likedSlice.actions;

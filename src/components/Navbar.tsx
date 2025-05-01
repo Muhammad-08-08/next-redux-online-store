@@ -6,7 +6,7 @@ import LogInModal from "./LogInModal";
 
 function Navbar() {
   return (
-    <div className="container mx-auto px-6 py-4">
+    <div className="container mx-auto py-4">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-6">
           <Link href="/">
