@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 import Api from "@/API/Api";
 import { RiUser2Fill } from "react-icons/ri";
+import { Loader2 } from "lucide-react"; 
+
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -23,7 +26,6 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
 
 type FormValues = {
   email: string;
@@ -33,6 +35,7 @@ type FormValues = {
 function LogInModal() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false); 
   const navigate = useRouter();
 
   useEffect(() => {
@@ -51,6 +54,7 @@ function LogInModal() {
   });
 
   const onSubmit = async (values: FormValues) => {
+    setIsLoading(true);
     try {
       const { data } = await Api.post(
         "https://nt.softly.uz/api/auth/login",
@@ -67,6 +71,8 @@ function LogInModal() {
     } catch (error: any) {
       console.error("Login xatosi:", error?.response?.data || error.message);
       toast.error("Login yoki parol noto'g'ri. Iltimos, qayta urinib ko'ring.");
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -95,7 +101,7 @@ function LogInModal() {
         <DialogContent className="max-w-lg sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>LogIn</DialogTitle>
-            <DialogDescription>LogIn kiriting</DialogDescription>
+            <DialogDescription>Email va parol kiriting</DialogDescription>
           </DialogHeader>
 
           <Form {...form}>
@@ -105,7 +111,7 @@ function LogInModal() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>email</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="email" {...field} />
                     </FormControl>
@@ -118,7 +124,7 @@ function LogInModal() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>password</FormLabel>
+                    <FormLabel>Parol</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="••••••••"
@@ -130,7 +136,11 @@ function LogInModal() {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+
+              <Button type="submit" disabled={isLoading}>
+                {isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                Submit
+              </Button>
             </form>
           </Form>
 
