@@ -23,7 +23,6 @@ export default function YandexMaps() {
                     })
                     setLoading(false)
                 }, (e) => {
-                    console.log(e);
                     setLoading(false)
 
                 })

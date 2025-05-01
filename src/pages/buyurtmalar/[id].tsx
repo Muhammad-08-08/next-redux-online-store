@@ -39,7 +39,6 @@ function Buyurtlamar() {
                 headers: { Authorization: `Bearer ${accessToken}` },
             })
             .then((response) => {
-                console.log(response.data.items);
                 setOrders(response.data.items);
             });
     }, [id]);
