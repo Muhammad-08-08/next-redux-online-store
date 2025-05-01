@@ -16,7 +16,12 @@ export async function getServerSideProps(orgs: GetServerSidePropsContext) {
     })
     return {
         props: {
-            data: res.data
+            data: {
+                categoriesPage: res.data,
+                limit: Number(orgs.query.limit),
+                page: Number(orgs.query.page),
+                categoryId: orgs.params?.id
+            }
         }
     }
 }
@@ -35,7 +40,10 @@ function CategoriesPage({ data }: categoryTypes) {
     if (!data.categoriesPage) {
         return <p className="text-center font-bold ">Loading...</p>
     }
-    const totalPages = Math.ceil(data.categoriesPage?.totalItems / data.limit);
+    const totalPages = data.categoriesPage && data.limit
+        ? Math.ceil((data.categoriesPage.totalItems || 0) / data.limit)
+        : 0;
+
 
     return (
         <div className="container mx-auto py-6">
