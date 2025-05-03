@@ -51,7 +51,9 @@ const ProfilePage = () => {
         setOrders(response.data.items);
       });
   }, []);
-
+  const name = useSelector((state: RootState) => state.login.user?.name);
+  const id = useSelector((state: RootState) => state.login.user?.id);
+  const phone = useSelector((state: RootState) => state.login.user?.phone);
   return (
     <div className="bg-gray-100">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 py-6 min-h-screen container mx-auto">
@@ -64,11 +66,11 @@ const ProfilePage = () => {
             className="flex items-center gap-4 cursor-pointer"
           >
             <div className="w-12 h-12 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
-              M
+              {name?.charAt(0)}
             </div>
             <div>
-              <p className="font-semibold text-gray-800">Muhammad</p>
-              <p className="text-xs text-gray-600">+998773058208</p>
+              <p className="font-semibold text-gray-800">{name}</p>
+              <p className="text-xs text-gray-600">{phone || "kiritilmagan"}</p>
             </div>
           </div>
           <div className="flex flex-col gap-4 text-sm">
@@ -104,8 +106,9 @@ const ProfilePage = () => {
                 <h3 className="font-semibold text-ulg mb-1">
                   Shaxsiy ma'lumotlar
                 </h3>
-                <p className="text-gray-800">Muhammad</p>
-                <p className="text-gray-500 text-sm">Telefon: +998773058208</p>
+                <p className="text-gray-800">{name}</p>
+                <p>ID: {id}</p>
+                <p className="text-gray-500 text-sm">Telefon: {phone || "kiritilmagan"}</p>
               </div>
               <button className="text-blue-600 hover:underline text-sm">
                 O'zgartirish

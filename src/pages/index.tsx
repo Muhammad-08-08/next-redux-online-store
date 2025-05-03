@@ -1,7 +1,5 @@
 import Banners from "@/components/Banners";
-import Footer from "@/components/Footer";
 import Products from "@/components/Products";
-import YandexMaps from "@/components/YandexMaps";
 import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
@@ -19,7 +17,6 @@ export default function Home() {
     <div className={`${geistSans.className} ${geistMono.className}`}>
       <Banners />
       <Products />
-      <Footer />
     </div>
   );
 }

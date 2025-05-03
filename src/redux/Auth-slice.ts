@@ -5,6 +5,7 @@ export type AuthSliceType = {
   user: {
     id: number;
     name: string;
+    phone: number
   } | null;
   accessToken: string;
 };

@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { rasmiylashtirish } from "@/redux/cart-slice";
 import { RootState } from "@/redux/store";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const CheckoutPage = () => {
   const cart = useSelector((state: RootState) => state.cart.items);
@@ -10,6 +14,8 @@ const CheckoutPage = () => {
     (state: RootState) => state.login.accessToken
   );
   const [address, setAddress] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   function handleSubmit() {
     axios
@@ -26,14 +32,13 @@ const CheckoutPage = () => {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       )
-      .then((res) => {
-        console.log("Buyurtma muvaffaqiyatli yuborildi:", res.data);
+      .then(() => {
+        toast.success("Buyurtma rasmiylashtirildi");
+        router.push("/profile");
+        dispatch(rasmiylashtirish());
       })
-      .catch((err) => {
-        console.error(
-          "Buyurtma yuborilmadi:",
-          err.response?.data || err.message
-        );
+      .catch(() => {
+        toast.error("xatolik");
       });
   }
 

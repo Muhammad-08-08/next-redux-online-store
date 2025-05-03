@@ -76,8 +76,17 @@ export const cartSlice = createSlice({
           : item;
       });
     },
+    rasmiylashtirish: () => {
+     
+      return { items: [] };
+    },
   },
 });
 
-export const { addToCart, deletedCart, increment, decrement } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  deletedCart,
+  increment,
+  decrement,
+  rasmiylashtirish,
+} = cartSlice.actions;
